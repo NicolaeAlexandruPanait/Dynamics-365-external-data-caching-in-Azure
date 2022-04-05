@@ -1,17 +1,19 @@
 ## Dynamics 365 external data caching in Azure
 
-As most of you might be aware the standard approach for testing OData and custom service API calls requires the [creation of an App registration](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/services-home-page#register-a-web-application-with-aad)
+Throughout my carrer as a Dynamics 365 specialist I was always involved in implementation where an external application was required to connect to the backend solution in real time.
+Such scenarios will include usage of a separate e-commerce solution integration or maybe an on premise portal.
+Although there is the option to export the data in datalake, it often poses a challenge undestanding the normalized table structure and the data is better queried using data entities.
 
-In reality the prerequisite to have admin access to Azure Active Directory (Azure AD) can be sometime a major concern and leads often to exterme delays in providing the dynamics developer / business consultant with such a method of authentication.
-
-The following workaround provides a quick solution for bypassing the App registration requirement and only requires that the user has access to the environment.
-This demo was done for a D365 F&O app but it will work for D365 Power platform apps as well. 
+One possible option to achieve that without having to directly query the dynamics environment is to maintain an external cache for the master data.
+This solution involves using the API management with and external redis cache.
+This will minimize the OData calls to the backend system and implicitly reducing the risks of throttling. 
+Due to the feature link , another benefit that this solution will provide is to have a data layer close to the client application, even on the same network gateway, which will drastically improve the overall user experince.
 
 ### Installing the Postman Interceptor chrome extension
 
 Postman Interceptor extenison can be installed in any chrome based browser. 
 The only requirement is to have the **Capture cookies** set to ON just like in the setup below
-![Postman extension](https://user-images.githubusercontent.com/25058196/158826065-1f433411-1dbe-45d9-9108-d8d3a47acf4f.PNG)
+
 
 
 ### Postman setup
