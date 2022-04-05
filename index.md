@@ -7,7 +7,8 @@ Although there is the option to export the data in datalake, it often poses a ch
 One possible option to achieve that without having to directly query the dynamics environment is to maintain an external cache for the master data.
 This solution involves using the API management with and external redis cache.
 This will minimize the OData calls to the backend system and implicitly reducing the risks of throttling. 
-Due to the feature link , another benefit that this solution will provide is to have a data layer close to the client application, even on the same network gateway, which will drastically improve the overall user experince.
+
+Due to the feature [Hybrid and multi-cloud API management](https://docs.microsoft.com/en-us/azure/api-management/self-hosted-gateway-overview#hybrid-and-multi-cloud-api-management) , another benefit that this solution will provide is to have a data layer close to the client application, even on the same network gateway, which will drastically improve the overall user experince.
 
 ### Installing the Postman Interceptor chrome extension
 
