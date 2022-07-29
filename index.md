@@ -2,11 +2,20 @@
 
 Often in the course of Dynamics 365 implementations, there are requirements to integrate the system with customer portals or some other external solutions hosted in different clouds or on premise infrastructure. This usually will lead to a tight-coupled integration which will potentially be affected by [Throttling prioritization](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/priority-based-throttling).
 
-Since the data in Dynamics 365 as in any ERP or CRM system contains a lot of static master data, which changes rarely if not at all. This allows for some   
+Since the data in Dynamics 365 as in any ERP or CRM system contains a lot of static master data, which changes rarely if not at all. Keeping a cached copy of this data outside of Dynamics 365 system will limit the number of API calls the system will receive when this data needs to be retrieved by the external application, reducing both the throttling change and the workload for the system.   
 
-### Installing the Postman Interceptor chrome extension
+### Solution overview
 
-Postman Interceptor extenison can be installed in any chrome based browser. 
+The high-level view of the solution can be displayed in the following diagram.
+TODO add image
+
+The redis cache acts as a buffer between the external system and Dynamics 365. 
+The API management self hosted gateway feature provides the option to keep this cache closer to the client solution.
+The communication between API management and Dynamics 365 can easily be achieved using the following sample policy from official documentation [Use OAuth2 for authorization between the gateway and a backend](https://docs.microsoft.com/en-us/azure/api-management/policies/use-oauth2-for-authorization)
+
+This will greatly improve the response time for the client application, which are usually very strict in the NFR.
+The azure function could be optional if the data does not change at all, or it changes so rarely that having a manual process for clearing the cache will be fit for purpose.
+The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/business-events/data-events) can be levereged to trigger the cache update. An 
 The only requirement is to have the **Capture cookies** set to ON just like in the setup below
 ![Postman extension](https://user-images.githubusercontent.com/25058196/158826065-1f433411-1dbe-45d9-9108-d8d3a47acf4f.PNG)
 
