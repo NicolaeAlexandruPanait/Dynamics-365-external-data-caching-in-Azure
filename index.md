@@ -19,9 +19,6 @@ The azure function will execute the cache refresh if the data is modified in the
 
 The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/business-events/data-events) can be levereged to add a message to a service bus queue and use the [Service bus trigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=in-process%2Cextensionv5&pivots=programming-language-csharp) for azure functions.
 
-The only requirement is to have the **Capture cookies** set to ON just like in the setup below
-![Postman extension](https://user-images.githubusercontent.com/25058196/158826065-1f433411-1dbe-45d9-9108-d8d3a47acf4f.PNG)
-
 
 ### Postman setup
 
