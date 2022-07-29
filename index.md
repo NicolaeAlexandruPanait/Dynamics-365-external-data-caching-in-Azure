@@ -40,3 +40,12 @@ Supposing there is a change in Dynamics 365 for that item. That would be equival
 
 The next D365 API call will be then rerouted again to the Dynamics 365 system and the new record data will be added to the cache.
 
+### Observations and remarks
+
+This solution works well only for scenario where data is not being changed frequently. Adding this process for cases where there are multiple data changes can be detrimental to the overall performance of the system. 
+
+For obvious reasons, only API call for GET operations are supported. So the solution will not work for custom services which are making use of the Post operation.
+
+In the ideal scenario, the business will make changes to the master data only once every few months. In this case it is better to have the cache cleanup done manually to avoid the need for the business data event.
+
+The same approach can probably be implemented different backend systems, so hopefully this will help some other type of implementations. 
