@@ -11,11 +11,14 @@ TODO add image
 
 The redis cache acts as a buffer between the external system and Dynamics 365. 
 The API management self hosted gateway feature provides the option to keep this cache closer to the client solution.
+This will greatly improve the response time for the client application, which are usually very strict in the NFR.
+
 The communication between API management and Dynamics 365 can easily be achieved using the following sample policy from official documentation [Use OAuth2 for authorization between the gateway and a backend](https://docs.microsoft.com/en-us/azure/api-management/policies/use-oauth2-for-authorization)
 
-This will greatly improve the response time for the client application, which are usually very strict in the NFR.
-The azure function could be optional if the data does not change at all, or it changes so rarely that having a manual process for clearing the cache will be fit for purpose.
-The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/business-events/data-events) can be levereged to trigger the cache update. An 
+The azure function will execute the cache refresh if the data is modified in the backend Dynamics 365 system. This artefact could be optional if the data does not change at all, or it changes so rarely that having a manual process will be fit for purpose. 
+
+The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/business-events/data-events) can be levereged to add a message to a service bus queue and use the [Service bus trigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=in-process%2Cextensionv5&pivots=programming-language-csharp) for azure functions.
+
 The only requirement is to have the **Capture cookies** set to ON just like in the setup below
 ![Postman extension](https://user-images.githubusercontent.com/25058196/158826065-1f433411-1dbe-45d9-9108-d8d3a47acf4f.PNG)
 
