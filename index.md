@@ -15,7 +15,9 @@ This will greatly improve the response time for the client application, which ar
 
 The communication between API management and Dynamics 365 can easily be achieved using the following sample policy from official documentation [Use OAuth2 for authorization between the gateway and a backend](https://docs.microsoft.com/en-us/azure/api-management/policies/use-oauth2-for-authorization)
 
-The azure function will execute the cache refresh if the data is modified in the backend Dynamics 365 system. This artefact could be optional if the data does not change at all, or it changes so rarely that having a manual process will be fit for purpose. 
+The azure function will execute the cache refresh if the data is modified in the backend Dynamics 365 system. A simple sample code on how that can be achieved is provided [here](https://github.com/NicolaeAlexandruPanait/Dynamics-365-external-data-caching-in-Azure/blob/main/http_azure_redis_func.txt). There are classes required. One is for initializing the azure function parameters which will contain the redis database connection string. The other will be the actual function runtime that will clear the cache. This is just a prototype but the logic can be extended depending on the business requirement.
+
+This artefact could be optional if the data does not change at all, or it changes so rarely that having a manual process will be fit for purpose. 
 
 The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/business-events/data-events) can be levereged to add a message to a service bus queue and use the [Service bus trigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=in-process%2Cextensionv5&pivots=programming-language-csharp) for azure functions.
 
