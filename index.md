@@ -23,33 +23,20 @@ The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-
 
 ### Let's see it in action
 
-First we need to setup the postman interceptor to **Capture requests and cookies**
+For testing purpose I've create a simple API management, which contains 2 api calls. One is to query the Dynamics 365 items list. 
+As it can be seen in the picture below this will point to D365Url/data/ReleasedProductsV2. The API definition will need to have the input as ItemId and the LegalEntity. 
 
-The setup is quite easy and completely automated by the postman team. Once that is completed you will need to specify the url of the dynamics environment.
-You should end up with something similar setup.  
+![D365 first call](https://user-images.githubusercontent.com/25058196/181766303-f4a5e12b-03b3-46f1-a6f2-975f1b17ee1d.png)
 
-![Postman Cookie setup](https://user-images.githubusercontent.com/25058196/158826075-5d0912f1-1576-46a6-a4f8-e71f45f7cb71.PNG)
+For the first API call, there will not be any data stored in the cache so it will result in a miss. This means that the call will be re-routed to the backend Dynamics 365 system.
 
+Subsequent calls with the same input parameters will result in a hit. In this scenario, the cache result will be a hit.
 
-### API testing
+![D365 subsequent calls](https://user-images.githubusercontent.com/25058196/181767517-c3ee1ba1-3bad-4919-8c2b-526b2613daf5.png)
 
-Now that all setup is in place let's do an simple OData call. One thing to note is that the D365 url must be setup without the trailing backslash.
+The second API will point to the Azure function with the code sample provided before: [sample azure http function](https://github.com/NicolaeAlexandruPanait/Dynamics-365-external-data-caching-in-Azure/blob/main/http_azure_redis_func.txt)
 
-Here is a simple example which creates a vendor group.
+Supposing there is a change in Dynamics 365 for that item. That would be equivalent with triggering the second API which will clear the cache for the specified item id.
 
-![Postman OData call](https://user-images.githubusercontent.com/25058196/158974766-8aea6643-162d-4ddd-bc93-79d5102f762c.PNG)
-
-Simply run it without any additional setup and the record will get created
-
-![Postmand Odata result](https://user-images.githubusercontent.com/25058196/158975540-650f827c-e172-4361-984d-8c697a455a8c.PNG)
-
-### Observations
-
-There are other options out there that can help the developers such as Power automate connectors. However the Dynamics connectors are premium.
-
-There is also the option to *Edit and resend the request* in the Mozilla Firefox. Thanks to this feature i was able to work out that the "Origin" header needs to be added to the Postman call.
-
-I hope this will make the work easy for some of the integration experts out there. 
-
-Happy testing !!!
+The next D365 API call will be then rerouted again to the Dynamics 365 system and the new record data will be added to the cache.
 
