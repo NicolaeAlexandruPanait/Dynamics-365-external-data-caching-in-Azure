@@ -21,8 +21,7 @@ This artefact could be optional if the data does not change at all, or it change
 
 The [Business data events](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/business-events/data-events) can be levereged to add a message to a service bus queue and use the [Service bus trigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-service-bus-trigger?tabs=in-process%2Cextensionv5&pivots=programming-language-csharp) for azure functions.
 
-
-### Postman setup
+### Let's see it in action
 
 First we need to setup the postman interceptor to **Capture requests and cookies**
 
