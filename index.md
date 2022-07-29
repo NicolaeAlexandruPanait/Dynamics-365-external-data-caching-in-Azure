@@ -1,11 +1,8 @@
 ## Dynamics 365 external data caching in Azure
 
-Often in the course of Dynamics 365 implementations, there are requirements to integrate the system with customer portals or some other external solutions hosted in different clouds or on premise infrastructure. This usually will lead to a tight-coupled integration which will potentially be affected by [Throttling prioritization](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/priority-based-throttling)
+Often in the course of Dynamics 365 implementations, there are requirements to integrate the system with customer portals or some other external solutions hosted in different clouds or on premise infrastructure. This usually will lead to a tight-coupled integration which will potentially be affected by [Throttling prioritization](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/priority-based-throttling).
 
-In reality the prerequisite to have admin access to Azure Active Directory (Azure AD) can be sometime a major concern and leads often to exterme delays in providing the dynamics developer / business consultant with such a method of authentication.
-
-The following workaround provides a quick solution for bypassing the App registration requirement and only requires that the user has access to the environment.
-This demo was done for a D365 F&O app but it will work for D365 Power platform apps as well. 
+Since the data in Dynamics 365 as in any ERP or CRM system contains a lot of static master data, which changes rarely if not at all. This allows for some   
 
 ### Installing the Postman Interceptor chrome extension
 
