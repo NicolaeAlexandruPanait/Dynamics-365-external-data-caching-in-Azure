@@ -1,6 +1,6 @@
 ## Dynamics 365 external data caching in Azure
 
-Often in the course of Dynamics 365 implementations, there are requirements to integrate the system with customer portals or some other external solutions hosted in different clouds or on premise infrastructure. This usually will lead to a tight-coupled integration which will potentially be affected by [Throttling prioritization]([https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/priority-based-throttling])
+Often in the course of Dynamics 365 implementations, there are requirements to integrate the system with customer portals or some other external solutions hosted in different clouds or on premise infrastructure. This usually will lead to a tight-coupled integration which will potentially be affected by [Throttling prioritization](https://docs.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/priority-based-throttling)
 
 In reality the prerequisite to have admin access to Azure Active Directory (Azure AD) can be sometime a major concern and leads often to exterme delays in providing the dynamics developer / business consultant with such a method of authentication.
 
